@@ -1,12 +1,13 @@
 .content{
-	display: grid;
-	grid-template-columns: 70% 30%;
-	grid-template-rows: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .field{
 	border: 1px solid #000;
 	margin: 5px;
+	flex-grow: 1;
 	position: relative;
 	height: 800px;
 }
