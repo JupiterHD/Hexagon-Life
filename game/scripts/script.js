@@ -1,7 +1,8 @@
 let N = 40;
 
 let FIELD = [];
-let settings = [0, 0, 1, 1, 0, 0, 0]
+let live = [0, 0, 1, 1, 0, 0, 0];
+let rebirth = [0, 0, 0, 1, 0, 0, 0];
 let color = "black";
 let is_random = false;
 let delay = 1000;
@@ -54,13 +55,21 @@ function init() {
 	nxtstep.addEventListener('click', step);
 	yes.addEventListener('click', clickYes);
 	no.addEventListener('click', clickNo);
-	document.getElementById('set0').addEventListener('click', changeSettings);
-	document.getElementById('set1').addEventListener('click', changeSettings);
-	document.getElementById('set2').addEventListener('click', changeSettings);
-	document.getElementById('set3').addEventListener('click', changeSettings);
-	document.getElementById('set4').addEventListener('click', changeSettings);
-	document.getElementById('set5').addEventListener('click', changeSettings);
-	document.getElementById('set6').addEventListener('click', changeSettings);
+	document.getElementById('liv0').addEventListener('click', changeSettingsLive);
+	document.getElementById('liv1').addEventListener('click', changeSettingsLive);
+	document.getElementById('liv2').addEventListener('click', changeSettingsLive);
+	document.getElementById('liv3').addEventListener('click', changeSettingsLive);
+	document.getElementById('liv4').addEventListener('click', changeSettingsLive);
+	document.getElementById('liv5').addEventListener('click', changeSettingsLive);
+	document.getElementById('liv6').addEventListener('click', changeSettingsLive);
+
+	document.getElementById('rec0').addEventListener('click', changeSettingsRebirth);
+	document.getElementById('rec1').addEventListener('click', changeSettingsRebirth);
+	document.getElementById('rec2').addEventListener('click', changeSettingsRebirth);
+	document.getElementById('rec3').addEventListener('click', changeSettingsRebirth);
+	document.getElementById('rec4').addEventListener('click', changeSettingsRebirth);
+	document.getElementById('rec5').addEventListener('click', changeSettingsRebirth);
+	document.getElementById('rec6').addEventListener('click', changeSettingsRebirth);
 
 }
 
@@ -192,14 +201,26 @@ function randCells() {
 	updateGen(0);
 }
 
-function changeSettings() {
-	if(settings[parseInt(this.value)] == 1)
+function changeSettingsLive() {
+	if(live[parseInt(this.value)] == 1)
 	{
-		settings[parseInt(this.value)] = 0;
+		live[parseInt(this.value)] = 0;
 		this.removeAttribute("checked");
 	}else
 	{
-		settings[parseInt(this.value)] = 1;
+		live[parseInt(this.value)] = 1;
+		this.setAttribute("checked", "");
+	}
+}
+
+function changeSettingsRebirth() {
+	if(rebirth[parseInt(this.value)] == 1)
+	{
+		rebirth[parseInt(this.value)] = 0;
+		this.removeAttribute("checked");
+	}else
+	{
+		rebirth[parseInt(this.value)] = 1;
 		this.setAttribute("checked", "");
 	}
 }
