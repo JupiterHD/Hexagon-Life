@@ -6,7 +6,6 @@ function start() {
 
 function pause() {
 	if(game == null)return;
-	is_gaming = false;
 	clearInterval(game);
 	game = null;
 }
