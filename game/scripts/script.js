@@ -7,6 +7,7 @@ let is_random = false;
 let delay = 1000;
 let game = null;
 let stopgame = true;
+let gen = 0;
 
 for (let i = 0; i < N; i++) {
 	for(let j = 0; j < N; j++)
@@ -25,6 +26,7 @@ let clear = document.getElementById('clear');
 let nxtstep = document.getElementById('step');
 let yes = document.getElementById('yes_stop');
 let no = document.getElementById('no_stop');
+let generation = document.getElementById('generation');
 
 window.addEventListener('load', init);
 
@@ -135,6 +137,7 @@ function change() {
 	//console.log(col);
 	if(FIELD[id] == 1)kill(id);
 	else revive(id);
+	updateGen(0);
 }
 
 function revive(pos) {
@@ -165,6 +168,8 @@ function clearField() {
 	}
 	if(game != null)clearInterval(game);
 	game = null;
+
+	updateGen(0);
 }
 
 function extinction() {
@@ -184,6 +189,7 @@ function randCells() {
 		if(randInt(1) == 1)revive(i);
 		else kill(i);
 	}
+	updateGen(0);
 }
 
 function changeSettings() {
@@ -204,4 +210,9 @@ function clickNo() {
 
 function clickYes() {
 	stopgame = true;
+}
+
+function updateGen(num) {
+	gen = num;
+	generation.textContent = gen;
 }
