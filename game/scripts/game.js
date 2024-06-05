@@ -25,7 +25,7 @@ function step() {
 		arr.push(p);
 	}
 	for(let i = 0; i < arr.length; i++)
-		if(settings[arr[i]] == 1)revive(i);
+		if((live[arr[i]] == 1 && FIELD[i] == 1) || (rebirth[arr[i]] == 1 && FIELD[i] == 0))revive(i);
 		else kill(i);
 	if(stopgame)extinction();
 	updateGen(gen+1);
