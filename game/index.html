@@ -7,6 +7,9 @@
 		<title>Hexagon Life</title>
 	</head>
 	<body>
+		<div>
+			<h1>HEXAGON-LIFE</h1>
+		</div>
 		<div class="content">
 			<div class="field" id="field">
 
@@ -20,6 +23,41 @@
 
 				<button id="start">Старт</button>
 				<button id="pause">Пауза</button>
+				<button id="step">Шаг</button><br><br>
+				
+				<label for="speed">Скорость игры</label><br>
+				<input type="range" min="0" max="2000" step="100" value="1000" name="speed" id="speed"><br><br>
+				<button id="random">Случайное заполнение</button>
+				<button id="clear">Очистить поле</button><br><br>
+
+				<p>Настройки условий "жизни" клеток</p>
+				<input type="checkbox" name="set0" id="set0" value="0">
+				<label for="set0">0</label>
+
+				<input type="checkbox" name="set1" id="set1" value="1">
+				<label for="set1">1</label>
+
+				<input type="checkbox" name="set2" checked id="set2" value="2">
+				<label for="set2">2</label>
+
+				<input type="checkbox" name="set3" checked id="set3" value="3">
+				<label for="set3">3</label>
+
+				<input type="checkbox" name="set4" id="set4" value="4">
+				<label for="set4">4</label>
+
+				<input type="checkbox" name="set5" id="set5" value="5">
+				<label for="set5">5</label>
+
+				<input type="checkbox" name="set6" id="set6" value="6">
+				<label for="set6">6</label><br><br>
+
+				<p>Останавливать игру при смерти всех клеток?</p>
+				<input type="radio" name="stopping" id="yes_stop" value="yes" checked>
+				<label for="yes_stop">Да</label>
+
+				<input type="radio" name="stopping" id="no_stop" value="no">
+				<label for="no_stop">Нет</label>
 			</div>
 		</div>
 
