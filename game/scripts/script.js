@@ -1,11 +1,12 @@
-let N = 20;
+let N = 40;
 
 let FIELD = [];
+let settings = [0, 0, 1, 1, 0, 0, 0]
 let color = "black";
 let is_random = false;
-let is_gaming = false;
 let delay = 1000;
 let game = null;
+let stopgame = true;
 
 for (let i = 0; i < N; i++) {
 	for(let j = 0; j < N; j++)
@@ -18,6 +19,12 @@ let randcol = document.getElementById('randcol');
 let randcols = document.getElementById('randcols');
 let startbtn = document.getElementById('start');
 let pausebtn = document.getElementById('pause');
+let speed = document.getElementById('speed');
+let random = document.getElementById('random');
+let clear = document.getElementById('clear');
+let nxtstep = document.getElementById('step');
+let yes = document.getElementById('yes_stop');
+let no = document.getElementById('no_stop');
 
 window.addEventListener('load', init);
 
@@ -27,8 +34,8 @@ function init() {
 			const cell = document.createElement('div');
 			cell.className = "cell";
 			cell.id = i*N + j;
-			cell.style.left = (j*25 + (i % 2)*12.5) + "px";
-			cell.style.top = i*25 + "px";
+			cell.style.left = (j*20 + (i % 2)*10) + "px";
+			cell.style.top = i*20 + "px";
 			cell.style.position = "absolute";
 			cell.addEventListener('click', change)
 			document.getElementById('field').appendChild(cell);
@@ -39,6 +46,20 @@ function init() {
 	randcols.addEventListener('click', rands);
 	startbtn.addEventListener('click', start);
 	pausebtn.addEventListener('click', pause);
+	speed.addEventListener('change', changeSpeed);
+	random.addEventListener('click', randCells);
+	clear.addEventListener('click', clearField);
+	nxtstep.addEventListener('click', step);
+	yes.addEventListener('click', clickYes);
+	no.addEventListener('click', clickNo);
+	document.getElementById('set0').addEventListener('click', changeSettings);
+	document.getElementById('set1').addEventListener('click', changeSettings);
+	document.getElementById('set2').addEventListener('click', changeSettings);
+	document.getElementById('set3').addEventListener('click', changeSettings);
+	document.getElementById('set4').addEventListener('click', changeSettings);
+	document.getElementById('set5').addEventListener('click', changeSettings);
+	document.getElementById('set6').addEventListener('click', changeSettings);
+
 }
 
 function rgbToHex(color) {
@@ -106,7 +127,7 @@ function changeColors() {
 }
 
 function change() {
-	if(is_gaming)return;
+	if(game != null)return;
 	let id = parseInt(this.id);
 	let row = Math.floor(id / N);
 	//console.log(row);
@@ -127,4 +148,60 @@ function revive(pos) {
 function kill(pos) {
 	FIELD[pos] = 0;
 	document.getElementById(pos).style.background = "white";
+}
+
+function changeSpeed() {
+	delay = this.value;
+	if(game != null)
+	{
+		clearInterval(game);
+		game = setInterval(step, delay);
+	}
+}
+
+function clearField() {
+	for (let i = 0; i < FIELD.length; i++) {
+		kill(i);
+	}
+	if(game != null)clearInterval(game);
+	game = null;
+}
+
+function extinction() {
+	let num = 0;
+	for (let i = 0; i < FIELD.length; i++) {
+		if(FIELD[i] == 1)num++;
+	}
+	if(num == 0)
+	{
+		if(game != null)clearInterval(game);
+		game = null;
+	}
+}
+
+function randCells() {
+	for (let i = 0; i < FIELD.length; i++) {
+		if(randInt(1) == 1)revive(i);
+		else kill(i);
+	}
+}
+
+function changeSettings() {
+	if(settings[parseInt(this.value)] == 1)
+	{
+		settings[parseInt(this.value)] = 0;
+		this.removeAttribute("checked");
+	}else
+	{
+		settings[parseInt(this.value)] = 1;
+		this.setAttribute("checked", "");
+	}
+}
+
+function clickNo() {
+	stopgame = false;
+}
+
+function clickYes() {
+	stopgame = true;
 }
