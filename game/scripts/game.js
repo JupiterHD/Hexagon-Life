@@ -28,4 +28,5 @@ function step() {
 		if(settings[arr[i]] == 1)revive(i);
 		else kill(i);
 	if(stopgame)extinction();
+	updateGen(gen+1);
 }
